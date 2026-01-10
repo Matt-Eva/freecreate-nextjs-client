@@ -1,10 +1,18 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Test from "./Test";
+import { Suspense } from "react";
 
 export default function Home() {
+  // throw new Error("problem!");
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <Suspense fallback={<div>loading...</div>}>
+          <Test />
+        </Suspense>
+
         <Image
           className={styles.logo}
           src="/next.svg"
