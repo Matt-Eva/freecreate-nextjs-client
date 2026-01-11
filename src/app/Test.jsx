@@ -18,14 +18,11 @@ function Test({ hello }) {
 
   async function getCsrfToken() {
     try {
-      const res = await apiClient.get(
-        process.env.NEXT_PUBLIC_API + "/get-csrf",
-        {
-          credentials: "include",
-        }
-      );
-      if (res.statusText === "OK") {
-        const token = res.headers["x-csrf-token"];
+      const res = await fetch(process.env.NEXT_PUBLIC_API + "/get-csrf", {
+        credentials: "include",
+      });
+      if (res.ok) {
+        const token = res.headers.get("X-CSRF-Token");
         setCsrfToken(token);
       } else {
         console.log(res);
@@ -54,14 +51,20 @@ function Test({ hello }) {
   async function postHello() {
     console.log(csrfToken);
     try {
-      const res = await apiClient.post(
+      const res = await fetch(
         process.env.NEXT_PUBLIC_API + "/hello",
-        { message: "Hello" },
+
         {
+          method: "POST",
           headers: {
-            // "Content-Type": "application/json",
+            "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
           },
+          credentials: "include",
+          withCredentials: true,
+          body: JSON.stringify({
+            message: "hello!",
+          }),
         }
       );
       console.log(res);
