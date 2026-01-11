@@ -27,7 +27,6 @@ function Test({ hello }) {
       if (res.statusText === "OK") {
         const token = res.headers["x-csrf-token"];
         setCsrfToken(token);
-        apiClient.defaults.headers.common["X-CSRF-Token"] = token;
       } else {
         console.log(res);
       }
@@ -53,23 +52,26 @@ function Test({ hello }) {
   }
 
   async function postHello() {
+    console.log(csrfToken);
     try {
-      const res = await apiClient.post(process.env.NEXT_PUBLIC_API + "/hello", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: "hello",
-        }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        console.log(data);
-      } else {
-        const error = await res.text();
-        throw new Error(error);
-      }
+      const res = await apiClient.post(
+        process.env.NEXT_PUBLIC_API + "/hello",
+        { message: "Hello" },
+        {
+          headers: {
+            // "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+          },
+        }
+      );
+      console.log(res);
+      // if (res.statusText == "OK") {
+      //   const data = await res.json();
+      //   console.log(data);
+      // } else {
+      //   // const error = await res.text();
+      //   // throw new Error(error);
+      // }
     } catch (e) {
       console.error(e);
     }
