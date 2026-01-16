@@ -6,29 +6,10 @@ import axios from "axios";
 
 function Test({ hello }) {
   const { csrfToken } = useContext(csrfContext);
-  // const [csrfToken, setCsrfToken] = useState(null);
-  //   throw new Error("problem!");
 
   useEffect(() => {
     getHello();
-    // getCsrfToken();
   }, []);
-
-  // async function getCsrfToken() {
-  //   try {
-  //     const res = await fetch(process.env.NEXT_PUBLIC_API + "/get-csrf", {
-  //       credentials: "include",
-  //     });
-  //     if (res.ok) {
-  //       const token = res.headers.get("X-CSRF-Token");
-  //       setCsrfToken(token);
-  //     } else {
-  //       console.log(res);
-  //     }
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
 
   async function getHello() {
     try {
