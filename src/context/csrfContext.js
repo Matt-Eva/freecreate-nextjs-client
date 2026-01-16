@@ -1,7 +1,7 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
-export const csrfContext = createContext();
+export const CsrfContext = createContext();
 
 export function CsrfProvider({ children }) {
   const [csrfToken, setCsrfToken] = useState(null);
@@ -27,8 +27,8 @@ export function CsrfProvider({ children }) {
   }
 
   return (
-    <csrfContext.Provider value={{ csrfToken }}>
+    <CsrfContext.Provider value={{ csrfToken }}>
       {children}
-    </csrfContext.Provider>
+    </CsrfContext.Provider>
   );
 }

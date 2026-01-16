@@ -1,4 +1,5 @@
 import { CsrfProvider } from "@/context/csrfContext";
+import { UserProvider } from "@/context/userContext";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -21,7 +22,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <CsrfProvider>{children}</CsrfProvider>
+        <CsrfProvider>
+          <UserProvider>{children}</UserProvider>
+        </CsrfProvider>
       </body>
     </html>
   );

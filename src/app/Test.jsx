@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useState, useContext } from "react";
-import { csrfContext } from "@/context/csrfContext";
+import { CsrfContext } from "@/context/csrfContext";
+import { UserContext } from "@/context/userContext";
 import axios from "axios";
 
 function Test({ hello }) {
-  const { csrfToken } = useContext(csrfContext);
+  const { csrfToken } = useContext(CsrfContext);
+  const { user, login } = useContext(UserContext);
+  const [emailInput, setEmailInput] = useState("");
 
   useEffect(() => {
     getHello();
@@ -54,10 +57,24 @@ function Test({ hello }) {
     }
   }
 
+  function handleLoginSubmit(e) {
+    e.preventDefault();
+    login(emailInput);
+  }
+
+  function handleEmailInput(e) {
+    setEmailInput(e.target.value);
+  }
+
   return (
     <div>
       Test
+      {user.loggedIn ? <p>profile</p> : <p>login</p>}
       <button onClick={postHello}>test post</button>
+      <form onSubmit={handleLoginSubmit}>
+        <input type="text" value={emailInput} onChange={handleEmailInput} />
+        <input type="submit" value="login" />
+      </form>
     </div>
   );
 }
