@@ -13,7 +13,6 @@ export default function Home() {
         <Suspense fallback={<div>loading...</div>}>
           <Test />
         </Suspense>
-        <Link href="/edit-writing">EditWriting</Link>
       </main>
     </div>
   );

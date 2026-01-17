@@ -1,6 +1,7 @@
 import { CsrfProvider } from "@/context/csrfContext";
 import { UserProvider } from "@/context/userContext";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,7 +24,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <CsrfProvider>
-          <UserProvider>{children}</UserProvider>
+          <UserProvider>
+            <Link href="/edit-writing">EditWriting</Link>
+            <Link href="/edit-content">EditContent</Link>
+            {children}
+          </UserProvider>
         </CsrfProvider>
       </body>
     </html>
