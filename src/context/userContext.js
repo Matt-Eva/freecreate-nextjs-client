@@ -7,7 +7,7 @@ export const UserContext = createContext(startingContext);
 
 export function UserProvider({ children }) {
   const { csrfToken } = useContext(CsrfContext);
-  console.log(csrfToken);
+
   const [user, setUser] = useState(startingContext);
 
   useEffect(() => {
@@ -68,6 +68,23 @@ export function UserProvider({ children }) {
 
   async function logout() {
     try {
+      const res = await fetch(process.env.NEXT_PUBLIC_API + "/logout", {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken,
+        },
+      });
+      if (res.ok) {
+        setUser({
+          ...user,
+          loggedIn: false,
+        });
+      } else {
+        const error = await res.text();
+        throw new Error(error);
+      }
     } catch (e) {
       console.error(e);
     }

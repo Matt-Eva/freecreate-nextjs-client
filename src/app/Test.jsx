@@ -3,11 +3,11 @@
 import { useEffect, useState, useContext } from "react";
 import { CsrfContext } from "@/context/csrfContext";
 import { UserContext } from "@/context/userContext";
-import axios from "axios";
 
-function Test({ hello }) {
+function Test() {
   const { csrfToken } = useContext(CsrfContext);
-  const { user, login } = useContext(UserContext);
+  const { user, login, logout } = useContext(UserContext);
+
   const [emailInput, setEmailInput] = useState("");
 
   useEffect(() => {
@@ -71,6 +71,7 @@ function Test({ hello }) {
       Test
       {user.loggedIn ? <p>profile</p> : <p>login</p>}
       <button onClick={postHello}>test post</button>
+      {user.loggedIn ? <button onClick={logout}>logout</button> : null}
       <form onSubmit={handleLoginSubmit}>
         <input type="text" value={emailInput} onChange={handleEmailInput} />
         <input type="submit" value="login" />
