@@ -3,6 +3,7 @@ import { UserProvider } from "@/context/userContext";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
+import LoginButton from "./LoginButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
           <UserProvider>
             <Link href="/edit-writing">EditWriting</Link>
             <Link href="/edit-content">EditContent</Link>
+            <LoginButton />
             {children}
           </UserProvider>
         </CsrfProvider>
