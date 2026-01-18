@@ -1,5 +1,12 @@
+import LogoutButton from "./LogoutButton";
+
 function Profile() {
-  return <div>Profile</div>;
+  return (
+    <div>
+      Profile
+      <LogoutButton />
+    </div>
+  );
 }
 
 export default Profile;

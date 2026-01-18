@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Suspense fallback={<div>loading...</div>}>
+        {/* <Suspense fallback={<div>loading...</div>}>
           <Test />
-        </Suspense>
+        </Suspense> */}
       </main>
     </div>
   );
